@@ -14,7 +14,7 @@ except ImportError:
     # logging.warning("openai package is not installed")
 else:
     try:
-        client = openai.OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+        client = openai.OpenAI(api_key=os.environ.get("OPENAI_API_KEY"), base_url=os.environ.get("OPENAI_API_BASE"))
         is_openai_available = True
     except openai.OpenAIError:
         # logging.warning("OpenAI API key is not set. Please set the environment variable OPENAI_API_KEY")
@@ -50,7 +50,7 @@ class OpenAIChat(IntelligenceBackend):
         Instantiate the OpenAIChat backend.
 
         args:
-            temperature: the temperature of the sampling
+           temperature: the temperature of the sampling
             max_tokens: the maximum number of tokens to sample
             model: the model to use
             merge_other_agents_as_one_user: whether to merge messages from other agents as one user message
